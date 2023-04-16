@@ -1,0 +1,27 @@
+name: Label & comment pull requests
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  label_pull_requests:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: attach label to pull request
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ["pull request"]
+            })
+      - name: Comment on new pull request
+        uses: peter-evans/create-or-update-comment@v1
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Thanks for submitting this pull request!
