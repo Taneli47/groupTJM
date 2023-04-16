@@ -1,0 +1,15 @@
+name: Congratulate Committer
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  congratulate:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Congratulate Committer
+      uses: anmol098/wishes-action@v1
+      with:
+        message: 'Congratulations on your pull request, ${{ github.event.pull_request.user.login }}!'
+        token: ${{ secrets.GITHUB_TOKEN }}
