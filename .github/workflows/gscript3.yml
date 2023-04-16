@@ -1,8 +1,8 @@
 name: Label & comment issues #the name of the workflow
-on: # This action will trigger when an issue is reopened or opened.
-  issues:
+on:
+  pull_request_target:
     types:
-      - pull_request
+      - opened
 jobs: # The jobs that run in this workflow
   label_issues: # the first job is named as label_issues
     runs-on: ubuntu-latest # This job will run on the latest version of Ubuntu.
